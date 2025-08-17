@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 /**
@@ -490,7 +492,7 @@ class Mimes
      */
     public static function guessTypeFromExtension(string $extension)
     {
-        $extension = trim(strtolower($extension), '. ');
+        $extension = mb_trim(mb_strtolower($extension), '. ');
 
         if (! array_key_exists($extension, static::$mimes)) {
             return null;
@@ -508,9 +510,9 @@ class Mimes
      */
     public static function guessExtensionFromType(string $type, ?string $proposedExtension = null)
     {
-        $type = trim(strtolower($type), '. ');
+        $type = mb_trim(mb_strtolower($type), '. ');
 
-        $proposedExtension = trim(strtolower($proposedExtension ?? ''));
+        $proposedExtension = mb_trim(mb_strtolower($proposedExtension ?? ''));
 
         if (
             $proposedExtension !== ''

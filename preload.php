@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -71,14 +73,6 @@ class preload
         $this->loadAutoloader();
     }
 
-    private function loadAutoloader(): void
-    {
-        $paths = new Paths();
-        require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'Boot.php';
-
-        Boot::preload($paths);
-    }
-
     /**
      * Load PHP files.
      */
@@ -104,6 +98,14 @@ class preload
                 echo 'Loaded: ' . $file[0] . "\n";
             }
         }
+    }
+
+    private function loadAutoloader(): void
+    {
+        $paths = new Paths();
+        require mb_rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'Boot.php';
+
+        Boot::preload($paths);
     }
 }
 
